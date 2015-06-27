@@ -4,6 +4,6 @@ import mmx.com.hack.json.PathForwardRequest;
 
 public interface IPathForward {
 	
-	public void savePath(PathForwardRequest pathForwardRequest);
+	public void savePath(PathForwardRequest pathForwardRequest) throws Exception;
 	
 }

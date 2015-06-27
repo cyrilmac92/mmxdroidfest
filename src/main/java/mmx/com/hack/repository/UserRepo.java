@@ -16,6 +16,4 @@ public interface UserRepo extends CrudRepository<UserDetails, Long>{
 	
 	public UserDetails findByemailId (@Param("emailId") String emailId);
 	
-	
-
 }

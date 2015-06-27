@@ -10,6 +10,7 @@ import mmx.com.hack.repository.FileRepo;
 import mmx.com.hack.repository.KeyRepo;
 import mmx.com.hack.repository.UserRepo;
 import mmx.com.hack.service.IFileUploadService;
+import mmx.com.hack.service.IUtilService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,16 +19,13 @@ import org.springframework.stereotype.Service;
 public class FileUploadService implements IFileUploadService {
 	
 	@Autowired
-	UserRepo userRepo;
+	IUtilService utilService;
 	
 	@Autowired
 	KeyRepo keyRepo;
 	
 	@Autowired
 	FileRepo fileRepo;
-	
-	
-	
 	 
 	public void fileUpload(UploadRequestjson uploadRequestjson) throws Exception {
 		
@@ -35,7 +33,7 @@ public class FileUploadService implements IFileUploadService {
 		UserDetails userDetails = new UserDetails();
 		FileDomain fileDomain = new FileDomain();
 		KeysDomain key = new KeysDomain();
-		Long userId = validateAndFetchUserId(uploadRequestjson.getUser().getEmail(),
+		Long userId = utilService.validateAndFetchUserId(uploadRequestjson.getUser().getEmail(),
 						uploadRequestjson.getUser().getPassword());
 		if( userId != null) {
 			userDetails.setUserId(userId);
@@ -62,30 +60,6 @@ public class FileUploadService implements IFileUploadService {
 		
 		
 	}
-	
-	private long validateAndFetchUserId(String username, String password) throws Exception {
-		
-		
-		UserDetails userDetails =  userRepo.findByemailId(username);
-		
-		
-		
-		if (userDetails == null) {
-			userDetails = new UserDetails();
-			userDetails.setEmailId(username);
-			userDetails.setPassword(password);
-			userDetails.setPhoneNumber("phoneNumber");
-			userRepo.save(userDetails);
-			return userDetails.getUserId();
-			
-		} else if(userDetails.getPassword().equalsIgnoreCase(password)) {
-			return userDetails.getUserId();
-		} else {
-			throw new Exception("Invalid Password");
-		}
-		
-	}
-	
 	
 	private long validateAndFetchKeyId(UserDetails userDetails, String appPackageName) throws Exception {
 		

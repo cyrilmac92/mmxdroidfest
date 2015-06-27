@@ -50,7 +50,11 @@ public class FileUploadController {
 			produces = { "application/json" },  consumes = { "application/json" })
 	public String pathForward(PathForwardRequest pathForwardRequest ) {
 		
-		pathForwardService.savePath(pathForwardRequest);
+		try {
+			pathForwardService.savePath(pathForwardRequest);
+		} catch (Exception e) {
+
+		}
 		return null;
 	}
 }
