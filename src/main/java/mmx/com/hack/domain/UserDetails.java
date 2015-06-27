@@ -1,4 +1,4 @@
-/*package mmx.com.hack.domain;
+package mmx.com.hack.domain;
 
 import java.io.Serializable;
 import java.util.List;
@@ -14,6 +14,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 
+
+
 @Entity
 @Table(name = "USER_DETAILS")
 public class UserDetails{
@@ -23,14 +25,18 @@ public class UserDetails{
 	@Column(name = "USER_ID")
 	private Long userId;
 	
-	@Column(name = "USER_NAME")
-	private String userName;
+	@Column(name = "USER_EMAIL")
+	private String emailId;
 	
 	@Column(name = "USER_PASSWORD")
 	private String password;
 	
 	@Column(name = "USER_PHONE_NUMBER")
 	private String phoneNumber;
+	
+	
+	@OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL, mappedBy="userDetails")
+	private List<KeysDomain> keys;
 
 	public Long getUserId() {
 		return userId;
@@ -40,12 +46,14 @@ public class UserDetails{
 		this.userId = userId;
 	}
 
-	public String getUserName() {
-		return userName;
+	
+
+	public String getEmailId() {
+		return emailId;
 	}
 
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setEmailId(String emailId) {
+		this.emailId = emailId;
 	}
 
 	public String getPassword() {
@@ -69,4 +77,3 @@ public class UserDetails{
 	
 	
 }
-*/
