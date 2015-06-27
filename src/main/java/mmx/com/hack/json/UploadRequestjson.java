@@ -3,6 +3,14 @@ package mmx.com.hack.json;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 
+/**
+ * 
+ * This class is a request json for uploading a file and storing it in the DB. 
+ * Associated with files table.
+ * @author Mac - cyril
+ *
+ */
+
 @JsonPOJOBuilder
 public class UploadRequestjson {
 
@@ -39,8 +47,4 @@ public class UploadRequestjson {
 	public void setMessage(BlobDetailsJson message) {
 		this.message = message;
 	}
-
-	
-	
-
 }

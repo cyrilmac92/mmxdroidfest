@@ -2,7 +2,7 @@ package mmx.com.hack.controller;
 
 import mmx.com.hack.json.UploadRequestjson;
 import mmx.com.hack.json.UploadResponseJson;
-import mmx.com.hack.service.FileUploadService;
+import mmx.com.hack.service.impl.FileUploadService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,4 +38,8 @@ public class FileUploadController {
 		
 	}
 
+	@RequestMapping(value = "/path", method = RequestMethod.POST)
+	public String pathForward() {
+		return null;
+	}
 }
