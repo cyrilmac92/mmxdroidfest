@@ -1,7 +1,9 @@
 package mmx.com.hack.service;
 
-public interface IPathForward {
+import mmx.com.hack.json.PathForwardRequest;
 
+public interface IPathForward {
 	
-	public void savePath();
+	public void savePath(PathForwardRequest pathForwardRequest);
+	
 }

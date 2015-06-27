@@ -1,7 +1,10 @@
 package mmx.com.hack.controller;
 
+import mmx.com.hack.json.PathForwardRequest;
 import mmx.com.hack.json.UploadRequestjson;
 import mmx.com.hack.json.UploadResponseJson;
+import mmx.com.hack.service.IFileUploadService;
+import mmx.com.hack.service.IPathForward;
 import mmx.com.hack.service.impl.FileUploadService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +20,10 @@ public class FileUploadController {
 	
 	
 	@Autowired
-	FileUploadService fileUploadService;
+	IFileUploadService fileUploadService;
+	
+	@Autowired
+	IPathForward pathForwardService;
 	
 	
 	@RequestMapping(value = "/upload", method = RequestMethod.POST,
@@ -42,7 +48,9 @@ public class FileUploadController {
 
 	@RequestMapping(value = "/path", method = RequestMethod.POST,
 			produces = { "application/json" },  consumes = { "application/json" })
-	public String pathForward() {
+	public String pathForward(PathForwardRequest pathForwardRequest ) {
+		
+		pathForwardService.savePath(pathForwardRequest);
 		return null;
 	}
 }

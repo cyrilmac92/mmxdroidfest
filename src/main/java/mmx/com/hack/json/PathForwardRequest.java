@@ -4,11 +4,30 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class PathForwardRequest {
 	
-	@JsonProperty("path")
-	private String path;
-	
-	@JsonProperty("type")
-	private String type;
+	@JsonProperty("User")
+	UserDetailsJson user;
+
+	@JsonProperty("ApplicationPackageID")
+	String appId;
+
+	@JsonProperty("Path")
+	String path;
+
+	public UserDetailsJson getUser() {
+		return user;
+	}
+
+	public void setUser(UserDetailsJson user) {
+		this.user = user;
+	}
+
+	public String getAppId() {
+		return appId;
+	}
+
+	public void setAppId(String appId) {
+		this.appId = appId;
+	}
 
 	public String getPath() {
 		return path;
@@ -16,13 +35,5 @@ public class PathForwardRequest {
 
 	public void setPath(String path) {
 		this.path = path;
-	}
-
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
 	}
 }

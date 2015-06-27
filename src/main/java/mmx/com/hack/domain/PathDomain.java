@@ -23,7 +23,6 @@ public class PathDomain {
     private Long pathId;
 
     @Column( name = "PATH" )
-    @Lob
     private String path;
 
     @Column( name = "STORAGE_TYPE" )

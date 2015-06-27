@@ -67,11 +67,4 @@ public class KeysDomain {
 	public void setUserDetails(UserDetails userDetails) {
 		this.userDetails = userDetails;
 	}
-	
-	
-	
-	
-	
-	
-
 }
