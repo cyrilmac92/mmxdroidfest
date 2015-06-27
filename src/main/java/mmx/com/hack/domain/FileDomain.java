@@ -25,9 +25,9 @@ public class FileDomain {
 	
 	
 	
-	@Column( name = "FILE_STREAM" )
-	@Lob
-	private byte[] fileimage;
+	@Column( name = "FILE_STREAM", length = 1000 )
+	
+	private String fileStream;
 	
 	
 	@Column( name = "FILE_SIZE" )
@@ -35,10 +35,12 @@ public class FileDomain {
 	
 	
 	@Column( name = "FILE_TYPE" )
-	private String Type;
+	private String type;
 	
+	
+
 	@Column( name = "FILE_MODIFIED_BY" )
-	private String ModifiedBy;
+	private String modifiedBy;
 	
 	
 	@Column( name = "FILE_MODIFIED_AT" )
@@ -49,13 +51,14 @@ public class FileDomain {
 	private KeysDomain keyDetails;
 	
 	
-	public byte[] getFileimage() {
-		return fileimage;
+	public String getFileStream() {
+		return fileStream;
 	}
 
-	public void setFileimage(byte[] fileimage) {
-		this.fileimage = fileimage;
+	public void setFileStream(String fileStream) {
+		this.fileStream = fileStream;
 	}
+	
 
 	public long getSize() {
 		return size;
@@ -66,19 +69,19 @@ public class FileDomain {
 	}
 
 	public String getType() {
-		return Type;
+		return type;
 	}
 
 	public void setType(String type) {
-		Type = type;
+		this.type = type;
 	}
 
 	public String getModifiedBy() {
-		return ModifiedBy;
+		return modifiedBy;
 	}
 
 	public void setModifiedBy(String modifiedBy) {
-		ModifiedBy = modifiedBy;
+		this.modifiedBy = modifiedBy;
 	}
 
 	public Date getModifiedAt() {

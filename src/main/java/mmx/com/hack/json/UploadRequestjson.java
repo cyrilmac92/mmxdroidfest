@@ -15,21 +15,21 @@ import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 public class UploadRequestjson {
 
 	@JsonProperty("User")
-	UserDetailsJson status;
+	UserDetailsJson user;
 	
 
 	@JsonProperty("ApplicationPackageID")
 	String appId;
 
 	@JsonProperty("BlobEntity")
-	BlobDetailsJson message;
-	
-	public UserDetailsJson getStatus() {
-		return status;
+	BlobDetailsJson blob;
+
+	public UserDetailsJson getUser() {
+		return user;
 	}
 
-	public void setStatus(UserDetailsJson status) {
-		this.status = status;
+	public void setUser(UserDetailsJson user) {
+		this.user = user;
 	}
 
 	public String getAppId() {
@@ -40,11 +40,12 @@ public class UploadRequestjson {
 		this.appId = appId;
 	}
 
-	public BlobDetailsJson getMessage() {
-		return message;
+	public BlobDetailsJson getBlob() {
+		return blob;
 	}
 
-	public void setMessage(BlobDetailsJson message) {
-		this.message = message;
+	public void setBlob(BlobDetailsJson blob) {
+		this.blob = blob;
 	}
+
 }
