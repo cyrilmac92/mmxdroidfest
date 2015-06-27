@@ -18,6 +18,14 @@ import javax.persistence.Table;
 public class FileDomain {
 	
 	
+	public KeysDomain getKeyDetails() {
+		return keyDetails;
+	}
+
+	public void setKeyDetails(KeysDomain keyDetails) {
+		this.keyDetails = keyDetails;
+	}
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name = "FILE_ID")

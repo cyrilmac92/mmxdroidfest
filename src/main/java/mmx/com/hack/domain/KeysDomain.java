@@ -60,13 +60,13 @@ public class KeysDomain {
 		this.appPackageId = appPackageId;
 	}
 
-	/*public UserDetails getUserDetails() {
+	public UserDetails getUserDetails() {
 		return userDetails;
 	}
 
 	public void setUserDetails(UserDetails userDetails) {
 		this.userDetails = userDetails;
-	}*/
+	}
 	
 	
 	

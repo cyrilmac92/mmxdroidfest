@@ -14,6 +14,8 @@ public interface UserRepo extends CrudRepository<UserDetails, Long>{
 	public String searchWithJPQLQuery(@Param("emailId") String emailId, 
 			@Param("password") String password);
 	
+	public UserDetails findByemailId (@Param("emailId") String emailId);
+	
 	
 
 }
