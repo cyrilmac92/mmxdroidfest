@@ -1,8 +1,10 @@
 package mmx.com.hack.controller;
 
-import mmx.com.hack.json.UploadResponse;
+import mmx.com.hack.json.UploadRequestjson;
+import mmx.com.hack.json.UploadResponseJson;
+import mmx.com.hack.service.FileUploadService;
 
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,13 +15,24 @@ import org.springframework.web.bind.annotation.RestController;
 public class FileUploadController {
 	
 	
+	@Autowired
+	FileUploadService fileUploadService;
 	
-	@RequestMapping(value = "/upload", method = RequestMethod.POST)
-	public UploadResponse opportunityDetailsOnLocation() {
-		UploadResponse uploadResponse = new UploadResponse();
+	
+	@RequestMapping(value = "/upload", method = RequestMethod.POST,
+					produces = { "application/json" },  consumes = { "application/json" })
+	public UploadResponseJson opportunityDetailsOnLocation(UploadRequestjson uploadRequestjson) {
+		UploadResponseJson uploadResponse = new UploadResponseJson();
 		
-		uploadResponse.setStatus("SUCESS");
-		uploadResponse.setMessage("File uploaded sucessfully.");
+		try { 
+				fileUploadService.fileUpload(uploadRequestjson);
+				uploadResponse.setStatus("SUCESS");
+				uploadResponse.setMessage("File uploaded sucessfully.");
+		} catch (Exception e) {
+			uploadResponse.setStatus("ERROR");
+			uploadResponse.setMessage("Error while uploading file");
+		}
+			
 		
 		return uploadResponse;
 		

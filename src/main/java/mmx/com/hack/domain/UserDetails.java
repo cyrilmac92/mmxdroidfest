@@ -42,6 +42,14 @@ public class UserDetails{
 		return userId;
 	}
 
+	public List<KeysDomain> getKeys() {
+		return keys;
+	}
+
+	public void setKeys(List<KeysDomain> keys) {
+		this.keys = keys;
+	}
+
 	public void setUserId(Long userId) {
 		this.userId = userId;
 	}
