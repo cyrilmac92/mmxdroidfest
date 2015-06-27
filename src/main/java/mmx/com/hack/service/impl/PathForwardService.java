@@ -3,10 +3,13 @@ package mmx.com.hack.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import mmx.com.hack.RestoreBackupConstants;
+import mmx.com.hack.domain.KeysDomain;
+import mmx.com.hack.domain.PathDomain;
 import mmx.com.hack.domain.UserDetails;
 import mmx.com.hack.json.PathForwardRequest;
 import mmx.com.hack.repository.PathForwardRepo;
-import mmx.com.hack.repository.UserRepo;
+import mmx.com.hack.service.IKeyService;
 import mmx.com.hack.service.IPathForward;
 import mmx.com.hack.service.IUtilService;
 
@@ -16,11 +19,11 @@ public class PathForwardService implements IPathForward{
 	@Autowired
 	private IUtilService utilService;
 	
-	@Autowired
-	private PathForwardRepo pathForwardRepo;
+	@Autowired 
+	IKeyService keyService;
 	
 	@Autowired
-	private UserRepo userRepo;
+	private PathForwardRepo pathForwardRepo;
 	
 	@Override
 	public void savePath(PathForwardRequest pathForwardRequest) throws Exception {
@@ -36,9 +39,20 @@ public class PathForwardService implements IPathForward{
 		if(userId != null && userId != 0) {
 			userDetails.setUserId(userId);
 		}
-		//register the user and then save the path			
-		userRepo.save(userDetails);
+		PathDomain pathDomain = new PathDomain();
+		KeysDomain keysDetails = new KeysDomain();
 		
+		Long keyId = keyService.validateAndFetchKeyId(userDetails, pathForwardRequest.getAppId());
+		
+		keysDetails.setAppPackageId(pathForwardRequest.getAppId());
+		keysDetails.setUserDetails(userDetails);
+		keysDetails.setKeyId(keyId);
+		
+		pathDomain.setKeyDetails(keysDetails);
+		pathDomain.setPath(pathForwardRequest.getPath());
+		pathDomain.setStorageType(RestoreBackupConstants.EXTERNAL_ENTITY);
+		
+		pathForwardRepo.save(pathDomain);
 		
 	}
 }

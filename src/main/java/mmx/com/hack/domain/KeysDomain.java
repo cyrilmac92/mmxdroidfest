@@ -35,7 +35,10 @@ public class KeysDomain {
 	
 	@OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL, mappedBy="keyDetails")
 	private List<FileDomain> files;
-
+	
+	@OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL, mappedBy="keyDetails")
+	private List<PathDomain> pathDomain;
+	
 	public Long getKeyId() {
 		return keyId;
 	}
@@ -67,4 +70,5 @@ public class KeysDomain {
 	public void setUserDetails(UserDetails userDetails) {
 		this.userDetails = userDetails;
 	}
+
 }

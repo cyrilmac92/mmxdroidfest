@@ -10,6 +10,7 @@ import mmx.com.hack.repository.FileRepo;
 import mmx.com.hack.repository.KeyRepo;
 import mmx.com.hack.repository.UserRepo;
 import mmx.com.hack.service.IFileUploadService;
+import mmx.com.hack.service.IKeyService;
 import mmx.com.hack.service.IUtilService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,7 @@ public class FileUploadService implements IFileUploadService {
 	IUtilService utilService;
 	
 	@Autowired
-	KeyRepo keyRepo;
+	IKeyService keyService;
 	
 	@Autowired
 	FileRepo fileRepo;
@@ -40,7 +41,7 @@ public class FileUploadService implements IFileUploadService {
 			userDetails.setEmailId(uploadRequestjson.getUser().getEmail());
 			userDetails.setPhoneNumber("phoneNumber");
 			userDetails.setPassword(uploadRequestjson.getUser().getPassword());
-			Long keyId = validateAndFetchKeyId(userDetails,uploadRequestjson.getAppId());
+			Long keyId = keyService.validateAndFetchKeyId(userDetails,uploadRequestjson.getAppId());
 			if ( keyId != null) {
 				
 				key.setAppPackageId(uploadRequestjson.getAppId());
@@ -56,42 +57,5 @@ public class FileUploadService implements IFileUploadService {
 			}
 			
 		}
-		
-		
-		
 	}
-	
-	private long validateAndFetchKeyId(UserDetails userDetails, String appPackageName) throws Exception {
-		
-		List<KeysDomain> keys = keyRepo.findByuserDetails(userDetails);
-		boolean appExists = false;
-		long keyId = 0;
-		
-		try {
-		if(!keys.isEmpty()) {
-			for( KeysDomain key : keys ) {
-				
-				if( key.getAppPackageId().equalsIgnoreCase(appPackageName)) {
-					appExists = true;
-					return key.getKeyId();
-				}
-				
-			}
-		}
-		else if( !keys.isEmpty() || !appExists) {
-			KeysDomain key = new KeysDomain();
-			key.setUserDetails(userDetails);
-			key.setAppPackageId(appPackageName);
-			keyRepo.save(key);
-			return key.getKeyId();	
-		}
-		
-		} catch(Exception e) {
-			throw new Exception("App upload failed");
-		}
-		
-		return keyId;
-		
-	}
-	
 }
