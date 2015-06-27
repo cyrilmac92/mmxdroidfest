@@ -38,7 +38,8 @@ public class FileUploadController {
 		
 	}
 
-	@RequestMapping(value = "/path", method = RequestMethod.POST)
+	@RequestMapping(value = "/path", method = RequestMethod.POST,
+			produces = { "application/json" },  consumes = { "application/json" })
 	public String pathForward() {
 		return null;
 	}

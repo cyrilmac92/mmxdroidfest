@@ -9,12 +9,6 @@ import org.springframework.stereotype.Service;
 public class FileUploadService implements IFileUploadService {
 	
 	public void fileUpload(UploadRequestjson uploadRequestjson) {
-		
-		
-		
-	}
-	
-	
-	
 
+	}
 }
